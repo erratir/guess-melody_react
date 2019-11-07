@@ -1,7 +1,7 @@
 const path = require(`path`);
 
 module.exports = {
-  entry: `./src/index.js`,
+  entry: `./src/index.jsx`,
   output: {
     filename: `bundle.js`,
     path: path.join(__dirname, `public`) // eslint-disable-line
@@ -9,8 +9,8 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, `public`), // eslint-disable-line
     compress: false,
-    host: `0.0.0.0`,
-    port: 1337,
+    host: `127.0.0.1`,
+    port: 1338,
   },
   module: {
     rules: [
