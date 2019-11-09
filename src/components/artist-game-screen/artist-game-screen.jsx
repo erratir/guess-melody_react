@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Header from "../header/header.jsx";
 
 const ArtistGameScreen = (props) => {
   const {song, answers} = props;
 
   return <section className="game game--artist">
-
+    <Header/>
     <section className="game__screen">
       <h2 className="game__title">Кто исполняет эту песню?</h2>
       <div className="game__track">

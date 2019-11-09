@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Header from "../header/header.jsx";
 
 const GenreGameScreen = (props) => {
   const {answers, genre} = props;
   return <section className="game game--genre">
-
+    <Header/>
     <section className="game__screen">
       <h2 className="game__title">Выберите {genre} треки</h2>
       <form className="game__tracks">
