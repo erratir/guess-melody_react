@@ -40,7 +40,8 @@ class App extends PureComponent {
         genre ={question.genre}
         onclick = {onClick}/>;
       case `artist`: return <ArtistGameScreen
-        artists = {question.answers}
+        song = {question.song}
+        answers = {question.answers}
         onclick = {onClick}/>;
     }
 

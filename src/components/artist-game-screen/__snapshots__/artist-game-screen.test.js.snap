@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ArtistGameScreen is rendered correctly 1`] = `
+<section
+  className="game game--artist"
+>
+  <section
+    className="game__screen"
+  >
+    <h2
+      className="game__title"
+    >
+      Кто исполняет эту песню?
+    </h2>
+    <div
+      className="game__track"
+    >
+      <button
+        className="track__button track__button--play"
+        type="button"
+      />
+      <audio
+        src=""
+      />
+      <audio>
+        <source
+          src=""
+        />
+      </audio>
+    </div>
+    <form
+      className="game__artist"
+    >
+      <div
+        className="artist"
+      >
+        <input
+          className="artist__input visually-hidden"
+          id="answer-0"
+          name="answer"
+          type="radio"
+          value="artist-022"
+        />
+        <label
+          className="artist__name"
+          htmlFor="answer-1"
+        >
+          <img
+            alt="Mr Putin"
+            className="artist__picture"
+            src=""
+          />
+          Mr Putin
+        </label>
+      </div>
+      <div
+        className="artist"
+      >
+        <input
+          className="artist__input visually-hidden"
+          id="answer-1"
+          name="answer"
+          type="radio"
+          value="artist-122"
+        />
+        <label
+          className="artist__name"
+          htmlFor="answer-1"
+        >
+          <img
+            alt="Jon Snow"
+            className="artist__picture"
+            src=""
+          />
+          Jon Snow
+        </label>
+      </div>
+      <div
+        className="artist"
+      >
+        <input
+          className="artist__input visually-hidden"
+          id="answer-2"
+          name="answer"
+          type="radio"
+          value="artist-222"
+        />
+        <label
+          className="artist__name"
+          htmlFor="answer-1"
+        >
+          <img
+            alt="Mr. Bim"
+            className="artist__picture"
+            src=""
+          />
+          Mr. Bim
+        </label>
+      </div>
+    </form>
+  </section>
+</section>
+`;

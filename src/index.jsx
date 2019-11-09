@@ -5,11 +5,11 @@ import {maxTime, maxMistakes, questions} from "./mocks/game.js";
 
 const init = (gameQuestions) => {
   ReactDOM.render(<App
-      maxTime={maxTime}
-      maxMistakes={maxMistakes}
-      questions = {gameQuestions}
-    />,
-    document.querySelector(`.main`),
+    maxTime={maxTime}
+    maxMistakes={maxMistakes}
+    questions = {gameQuestions}
+  />,
+  document.querySelector(`.main`)
   );
 };
 
