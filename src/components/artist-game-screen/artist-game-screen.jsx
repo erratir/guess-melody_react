@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Header from "../header/header.jsx";
 
 const ArtistGameScreen = (props) => {
-  const {song, answers} = props;
+  const {song, answers, onAnswer} = props;
 
   return <section className="game game--artist">
     <Header/>
@@ -16,7 +16,7 @@ const ArtistGameScreen = (props) => {
           <source src={song.src}/>
         </audio>
       </div>
-      <form className="game__artist">
+      <form className="game__artist" onChange={onAnswer}>
 
         {answers.map((it, i) => <div className="artist" key={`artist-${i}`}>
           <input className="artist__input visually-hidden" type="radio" name="answer" value={`artist-${i}22`} id={`answer-${i}`}/>
@@ -40,6 +40,7 @@ ArtistGameScreen.propTypes = {
     artist: PropTypes.string.isRequired,
     pic: PropTypes.string.isRequired,
   })).isRequired,
+  onAnswer: PropTypes.func.isRequired,
 };
 
 export default ArtistGameScreen;

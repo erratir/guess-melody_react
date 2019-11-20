@@ -27,7 +27,7 @@ const mock = {
 it(`ArtistGameScreen is rendered correctly`, () => {
   const {song, answers} = mock;
   const tree = renderer.create(<ArtistGameScreen
-    // onAnswer = {jest.fn()}
+    onAnswer = {jest.fn()}
     song={song}
     answers={answers}/>
   ).toJSON();

@@ -8,7 +8,7 @@ it(`WelcomeScreen correctly renders`, () => {
         <WelcomeScreen
           maxTime={99}
           maxMistakes={33}
-          onClick={jest.fn()}/>
+          onAnswer={jest.fn()}/>
     ).toJSON();
 
   expect(tree).toMatchSnapshot();
