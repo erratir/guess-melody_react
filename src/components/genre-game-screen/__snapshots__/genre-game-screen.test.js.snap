@@ -87,6 +87,7 @@ exports[`GenreGameScreen is rendered correctly 1`] = `
     </h2>
     <form
       className="game__tracks"
+      onSubmit={[MockFunction]}
     >
       <div
         className="track"

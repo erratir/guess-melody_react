@@ -18,31 +18,33 @@ class App extends PureComponent {
     const {currentGameCount} = this.state;
     const {questions} = this.props;
 
-    return this._getScreen(questions[currentGameCount], () => {
+    const onAnswer = () => {
       this.setState({
         currentGameCount: currentGameCount + 1 >= questions.length ? -1 : currentGameCount + 1
       });
-    });
+    };
+
+    return this._getScreen(questions[currentGameCount], onAnswer);
   }
 
-  _getScreen(question, onClick) {
+  _getScreen(question, onAnswer) {
     if (!question) {
       const {maxTime, maxMistakes} = this.props;
       return <WelcomeScreen
         maxTime = {maxTime}
         maxMistakes = {maxMistakes}
-        onClick = {onClick}
+        onAnswer = {onAnswer}
       />;
     }
     switch (question.type) {
       case `genre`: return <GenreGameScreen
         answers = {question.answers}
         genre ={question.genre}
-        onclick = {onClick}/>;
+        onAnswer = {onAnswer}/>;
       case `artist`: return <ArtistGameScreen
         song = {question.song}
         answers = {question.answers}
-        onclick = {onClick}/>;
+        onAnswer = {onAnswer}/>;
     }
 
     return null;
