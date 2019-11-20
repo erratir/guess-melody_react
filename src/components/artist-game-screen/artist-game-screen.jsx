@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Header from "../header/header.jsx";
+import AudioPlayer from "../audio-player/audio-player.jsx";
 
 const ArtistGameScreen = (props) => {
   const {song, answers} = props;
@@ -10,11 +11,7 @@ const ArtistGameScreen = (props) => {
     <section className="game__screen">
       <h2 className="game__title">Кто исполняет эту песню?</h2>
       <div className="game__track">
-        <button className="track__button track__button--play" type="button"/>
-        <audio src={song.src}/>
-        <audio>
-          <source src={song.src}/>
-        </audio>
+        <AudioPlayer src={song.src}/>
       </div>
       <form className="game__artist">
 

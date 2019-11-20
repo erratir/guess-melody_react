@@ -7,19 +7,19 @@ export const questions = [
     genre: `rock`,
     answers: [
       {
-        src: `https://upload.wikimedia.org/wikipedia/commons/1/1f/Uganda_flag_and_national_anthem_-_Oh_Uganda_Land_o.ogg`,
+        src: `https://upload.wikimedia.org/wikipedia/commons/6/64/Ugandan_national_anthem%2C_performed_by_the_U.S._Navy_Band.ogg`,
         genre: `rock`
       },
       {
-        src: `https://commons.wikimedia.org/wiki/File:Zambian_national_anthem.oga`,
+        src: `https://upload.wikimedia.org/wikipedia/commons/f/f6/Zambian_national_anthem.oga`,
         genre: `pop`
       },
       {
-        src: `https://commons.wikimedia.org/wiki/File:Anthem_of_Buryatia_(Buryat_and_Russian_version).oga`,
+        src: `https://upload.wikimedia.org/wikipedia/commons/5/52/Anthem_of_Buryatia_%28Buryat_and_Russian_version%29.oga`,
         genre: `jazz`
       },
       {
-        src: `https://commons.wikimedia.org/wiki/File:National_anthem_of_Ukraine,_instrumental.oga`,
+        src: `https://upload.wikimedia.org/wikipedia/commons/6/6d/National_anthem_of_Ukraine%2C_instrumental.oga`,
         genre: `rock`
       }
     ]
@@ -50,19 +50,19 @@ export const questions = [
     genre: `jazz`,
     answers: [
       {
-        src: `https://upload.wikimedia.org/wikipedia/commons/1/1f/Uganda_flag_and_national_anthem_-_Oh_Uganda_Land_o.ogg`,
+        src: `https://upload.wikimedia.org/wikipedia/commons/6/64/Ugandan_national_anthem%2C_performed_by_the_U.S._Navy_Band.ogg`,
         genre: `rock`
       },
       {
-        src: `https://commons.wikimedia.org/wiki/File:Zambian_national_anthem.oga`,
+        src: `https://upload.wikimedia.org/wikipedia/commons/f/f6/Zambian_national_anthem.oga`,
         genre: `pop`
       },
       {
-        src: `https://commons.wikimedia.org/wiki/File:Anthem_of_Buryatia_(Buryat_and_Russian_version).oga`,
+        src: `https://upload.wikimedia.org/wikipedia/commons/5/52/Anthem_of_Buryatia_%28Buryat_and_Russian_version%29.oga`,
         genre: `jazz`
       },
       {
-        src: `https://commons.wikimedia.org/wiki/File:National_anthem_of_Ukraine,_instrumental.oga`,
+        src: `https://upload.wikimedia.org/wikipedia/commons/6/6d/National_anthem_of_Ukraine%2C_instrumental.oga`,
         genre: `rock`
       }
     ]
