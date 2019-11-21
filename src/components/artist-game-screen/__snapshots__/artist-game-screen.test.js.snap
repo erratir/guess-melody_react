@@ -88,16 +88,15 @@ exports[`ArtistGameScreen is rendered correctly 1`] = `
     >
       <button
         className="track__button track__button--play"
+        disabled={true}
+        onClick={[Function]}
         type="button"
       />
-      <audio
-        src=""
-      />
-      <audio>
-        <source
-          src=""
-        />
-      </audio>
+      <div
+        className="track__status"
+      >
+        <audio />
+      </div>
     </div>
     <form
       className="game__artist"

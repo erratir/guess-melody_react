@@ -87,13 +87,15 @@ exports[`GenreGameScreen is rendered correctly 1`] = `
     </h2>
     <form
       className="game__tracks"
-      onSubmit={[MockFunction]}
+      onSubmit={[Function]}
     >
       <div
         className="track"
       >
         <button
           className="track__button track__button--play"
+          disabled={true}
+          onClick={[Function]}
           type="button"
         />
         <div
@@ -124,6 +126,8 @@ exports[`GenreGameScreen is rendered correctly 1`] = `
       >
         <button
           className="track__button track__button--play"
+          disabled={true}
+          onClick={[Function]}
           type="button"
         />
         <div
@@ -154,6 +158,8 @@ exports[`GenreGameScreen is rendered correctly 1`] = `
       >
         <button
           className="track__button track__button--play"
+          disabled={true}
+          onClick={[Function]}
           type="button"
         />
         <div
@@ -184,6 +190,8 @@ exports[`GenreGameScreen is rendered correctly 1`] = `
       >
         <button
           className="track__button track__button--play"
+          disabled={true}
+          onClick={[Function]}
           type="button"
         />
         <div

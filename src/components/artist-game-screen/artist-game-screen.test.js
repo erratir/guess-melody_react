@@ -26,10 +26,20 @@ const mock = {
 
 it(`ArtistGameScreen is rendered correctly`, () => {
   const {song, answers} = mock;
+
+  const createNodeMock = (element) => {
+    if (element.type === `audio`) {
+      return {
+        src: ``
+      };
+    }
+    return null;
+  };
+
   const tree = renderer.create(<ArtistGameScreen
     onAnswer = {jest.fn()}
     song={song}
-    answers={answers}/>
+    answers={answers}/>, {createNodeMock}
   ).toJSON();
 
   expect(tree).toMatchSnapshot();

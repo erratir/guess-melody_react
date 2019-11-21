@@ -26,10 +26,20 @@ const mock = {
 
 it(`GenreGameScreen is rendered correctly`, () => {
   const {genre, answers} = mock;
+
+  const createNodeMock = (element) => {
+    if (element.type === `audio`) {
+      return {
+        src: ``
+      };
+    }
+    return null;
+  };
+
   const tree = renderer.create(<GenreGameScreen
     onAnswer = {jest.fn()}
     genre = {genre}
-    answers = {answers}/>
+    answers = {answers}/>, {createNodeMock}
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
