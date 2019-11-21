@@ -6,15 +6,22 @@ class AudioPlayer extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    const {isPlaying, src} = props;
-
-    this._audio = new Audio(src);
+    const {isPlaying} = props;
 
     this.state = {
       isLoading: true,
       isPlaying,
-      progress: this._audio.currentTime
+      progress: 0
     };
+
+    this._onPlayButtonClick = this._onPlayButtonClick.bind(this);
+  }
+
+  componentDidMount() {
+
+    const {src} = this.props;
+
+    this._audio = new Audio(src);
 
     this._audio.oncanplaythrough = () => {
       this.setState({
@@ -40,7 +47,6 @@ class AudioPlayer extends React.PureComponent {
       });
     };
 
-    this._onPlayButtonClick = this._onPlayButtonClick.bind(this);
   }
 
   /**
@@ -69,6 +75,15 @@ class AudioPlayer extends React.PureComponent {
     } else {
       this._audio.pause();
     }
+  }
+
+  componentWillUnmount() {
+    this._audio.oncanplaythrough = null;
+    this._audio.onplay = null;
+    this._audio.onpause = null;
+    this._audio.ontimeupdate = null;
+    this._audio.src = ``;
+    this._audio = null;
   }
 
   /**
