@@ -6,11 +6,13 @@ class AudioPlayer extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this._audio = new Audio(this.props.src);
+    const {isPlaying, src} = props;
+
+    this._audio = new Audio(src);
 
     this.state = {
       isLoading: true,
-      isPlaying: false,
+      isPlaying,
       progress: this._audio.currentTime
     };
 
@@ -62,7 +64,7 @@ class AudioPlayer extends React.PureComponent {
   }
 
   componentDidUpdate() {
-    if (this.state.isPlaying) {
+    if (this.props.isPlaying) {
       this._audio.play();
     } else {
       this._audio.pause();
@@ -74,6 +76,7 @@ class AudioPlayer extends React.PureComponent {
    * @private
    */
   _onPlayButtonClick() {
+    this.props.onPlayButtonClick();
     this.setState({
       isPlaying: !this.state.isPlaying
     });
@@ -83,6 +86,8 @@ class AudioPlayer extends React.PureComponent {
 
 AudioPlayer.propTypes = {
   src: PropTypes.string.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
+  onPlayButtonClick: PropTypes.func.isRequired,
 };
 
 

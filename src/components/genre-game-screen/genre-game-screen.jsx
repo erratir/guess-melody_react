@@ -3,33 +3,52 @@ import PropTypes from "prop-types";
 import Header from "../header/header.jsx";
 import AudioPlayer from "../audio-player/audio-player.jsx";
 
-const GenreGameScreen = (props) => {
-  const {answers, genre, onAnswer} = props;
-  return <section className="game game--genre">
-    <Header/>
-    <section className="game__screen">
-      <h2 className="game__title">Выберите {genre} треки</h2>
-      <form className="game__tracks" onSubmit={onAnswer}>
+class GenreGameScreen extends React.PureComponent {
+  constructor(props) {
+    super(props);
 
-        {answers.map((it, i) =>
-          <div className="track" key={`answer-${i}`}>
-            <AudioPlayer src={it.src}/>
+    this.state = {
+      activePlayer: -1,
+    };
+  }
 
-            <div className="game__answer">
-              <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${i}`} id={`answer-${i}`}/>
-              <label className="game__check" htmlFor={`answer-${i}`}>
-                Отметить
-              </label>
+  render() {
+    const {answers, genre, onAnswer} = this.props;
+
+    return <section className="game game--genre">
+      <Header/>
+      <section className="game__screen">
+        <h2 className="game__title">Выберите {genre} треки</h2>
+        <form className="game__tracks" onSubmit={() => {
+          this.setState({activePlayer: -1});
+          onAnswer();
+        }}>
+
+          {answers.map((it, i) =>
+            <div className="track" key={`answer-${i}`}>
+              <AudioPlayer
+                src={it.src}
+                isPlaying = {i === this.state.activePlayer}
+                onPlayButtonClick = {() =>
+                  this.setState({
+                    activePlayer: this.state.activePlayer === i ? -1 : i
+                  })}
+              />
+              <div className="game__answer">
+                <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${i}`} id={`answer-${i}`}/>
+                <label className="game__check" htmlFor={`answer-${i}`}>
+                  Отметить
+                </label>
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        <button className="game__submit button" type="submit">Ответить</button>
-      </form>
-    </section>
-  </section>;
-
-};
+          <button className="game__submit button" type="submit">Ответить</button>
+        </form>
+      </section>
+    </section>;
+  }
+}
 
 GenreGameScreen.propTypes = {
   answers: PropTypes.arrayOf(PropTypes.shape({
