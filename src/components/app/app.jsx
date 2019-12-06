@@ -4,29 +4,33 @@ import ArtistGameScreen from "../artist-game-screen/artist-game-screen.jsx";
 import GenreGameScreen from "../genre-game-screen/genre-game-screen.jsx";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer";
 
 
 class App extends Component {
 
   render() {
-    const {questions, step, onUserAnswer} = this.props;
+    const {questions, step} = this.props;
 
-    return this._getScreen(questions[step], onUserAnswer);
+    return this._getScreen(questions[step]);
   }
 
-  _getScreen(question, onAnswer) {
+  _getScreen(question) {
+    const {onUserAnswer, mistakes, maxMistakes, onWelcomeScreenClick, maxTime} = this.props;
+
     if (!question) {
-      const {maxTime, maxMistakes, onWelcomeScreenClick} = this.props;
       return <WelcomeScreen
         maxTime={maxTime}
         maxMistakes={maxMistakes}
         onClick={onWelcomeScreenClick}
       />;
     }
+
+    const onAnswer = (userAnswer) => onUserAnswer(question, userAnswer, mistakes, maxMistakes);
+
     switch (question.type) {
       case `genre`: return <GenreGameScreen
-        answers = {question.answers}
-        genre ={question.genre}
+        question = {question}
         onAnswer = {onAnswer}/>;
       case `artist`: return <ArtistGameScreen
         song = {question.song}
@@ -40,6 +44,7 @@ class App extends Component {
 
 App.propTypes = {
   maxTime: PropTypes.number.isRequired,
+  mistakes: PropTypes.number.isRequired,
   maxMistakes: PropTypes.number.isRequired,
   questions: PropTypes.array.isRequired,
   step: PropTypes.number.isRequired,
@@ -55,17 +60,11 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 const mapDispatchToProps = (dispatch) => {
   return {
 
-    onWelcomeScreenClick: () => dispatch({
-      type: `INCREMENT_STEP`,
-      payload: 1,
-    }),
+    onWelcomeScreenClick: () => dispatch(ActionCreator[`INCREMENT_STEP`]()),
 
-    onUserAnswer: () => {
-      dispatch({
-        type: `INCREMENT_STEP`,
-        payload: 1,
-      });
-      // todo: тут dispatch c Action для проверки ответа пользователя и соответсвенно изменение mistakes в state Redux
+    onUserAnswer: (question, userAnswer, mistakes, maxMistakes) => {
+      dispatch(ActionCreator[`INCREMENT_STEP`]());
+      dispatch(ActionCreator[`INCREMENT_MISTAKES`](question, userAnswer, mistakes, maxMistakes));
     }
   };
 };

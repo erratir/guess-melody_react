@@ -32,13 +32,19 @@ class ArtistGameScreen extends React.PureComponent {
 
           />
         </div>
-        <form className="game__artist" onChange={onAnswer}>
+        <form className="game__artist">
 
-          {answers.map((it, i) => <div className="artist" key={`artist-${i}`}>
-            <input className="artist__input visually-hidden" type="radio" name="answer" value={`artist-${i}22`} id={`answer-${i}`}/>
-            <label className="artist__name" htmlFor="answer-1">
-              <img className="artist__picture" src={it.pic} alt={it.artist}/>
-              {it.artist}
+          {answers.map((answer, i) => <div className="artist" key={`artist-${i}`}>
+            <input className="artist__input visually-hidden"
+              type="radio"
+              name="answer"
+              value={`artist-${i}`}
+              id={`answer-${i}`}
+              onClick={() => onAnswer(answer)}
+            />
+            <label className="artist__name" htmlFor={`answer-${i}`}>
+              <img className="artist__picture" src={answer.pic} alt={answer.artist}/>
+              {answer.artist}
             </label>
           </div>)}
 

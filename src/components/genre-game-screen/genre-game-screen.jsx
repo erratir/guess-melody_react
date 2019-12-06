@@ -7,24 +7,27 @@ class GenreGameScreen extends React.PureComponent {
   constructor(props) {
     super(props);
 
+    const {answers} = this.props.question;
+
     this.state = {
       activePlayer: -1,
+      userAnswer: new Array(answers.length).fill(false),
     };
   }
 
   render() {
-    const {answers, genre, onAnswer} = this.props;
+    const {question, onAnswer} = this.props;
 
     return <section className="game game--genre">
       <Header/>
       <section className="game__screen">
-        <h2 className="game__title">Выберите {genre} треки</h2>
+        <h2 className="game__title">Выберите {question.genre} треки</h2>
         <form className="game__tracks" onSubmit={() => {
           this.setState({activePlayer: -1});
-          onAnswer();
+          onAnswer(this.state.userAnswer);
         }}>
 
-          {answers.map((it, i) =>
+          {question.answers.map((it, i) =>
             <div className="track" key={`answer-${i}`}>
               <AudioPlayer
                 src={it.src}
@@ -35,7 +38,18 @@ class GenreGameScreen extends React.PureComponent {
                   })}
               />
               <div className="game__answer">
-                <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${i}`} id={`answer-${i}`}/>
+                <input className="game__input visually-hidden"
+                  type="checkbox"
+                  name="answer"
+                  value={`answer-${i}`}
+                  id={`answer-${i}`}
+                  checked={this.state.userAnswer[i]}
+                  onChange={() => {
+                    const userAnswer = [...this.state.userAnswer];
+                    userAnswer[i] = !userAnswer[i];
+                    this.setState({userAnswer});
+                  }}
+                />
                 <label className="game__check" htmlFor={`answer-${i}`}>
                   Отметить
                 </label>
@@ -51,11 +65,13 @@ class GenreGameScreen extends React.PureComponent {
 }
 
 GenreGameScreen.propTypes = {
-  answers: PropTypes.arrayOf(PropTypes.shape({
+  question: PropTypes.shape({
+    answers: PropTypes.arrayOf(PropTypes.shape({
+      genre: PropTypes.oneOf([`rock`, `pop`, `jazz`]).isRequired,
+      src: PropTypes.string.isRequired
+    })).isRequired,
     genre: PropTypes.oneOf([`rock`, `pop`, `jazz`]).isRequired,
-    src: PropTypes.string.isRequired
-  })).isRequired,
-  genre: PropTypes.oneOf([`rock`, `pop`, `jazz`]).isRequired,
+  }).isRequired,
   onAnswer: PropTypes.func.isRequired,
 };
 
