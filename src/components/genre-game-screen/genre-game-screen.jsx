@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Header from "../header/header.jsx";
 import AudioPlayer from "../audio-player/audio-player.jsx";
 
 class GenreGameScreen extends React.PureComponent {
@@ -18,48 +17,45 @@ class GenreGameScreen extends React.PureComponent {
   render() {
     const {question, onAnswer} = this.props;
 
-    return <section className="game game--genre">
-      <Header/>
-      <section className="game__screen">
-        <h2 className="game__title">Выберите {question.genre} треки</h2>
-        <form className="game__tracks" onSubmit={() => {
-          this.setState({activePlayer: -1});
-          onAnswer(this.state.userAnswer);
-        }}>
+    return <section className="game__screen">
+      <h2 className="game__title">Выберите {question.genre} треки</h2>
+      <form className="game__tracks" onSubmit={() => {
+        this.setState({activePlayer: -1});
+        onAnswer(this.state.userAnswer);
+      }}>
 
-          {question.answers.map((it, i) =>
-            <div className="track" key={`answer-${i}`}>
-              <AudioPlayer
-                src={it.src}
-                isPlaying = {i === this.state.activePlayer}
-                onPlayButtonClick = {() =>
-                  this.setState({
-                    activePlayer: this.state.activePlayer === i ? -1 : i
-                  })}
+        {question.answers.map((it, i) =>
+          <div className="track" key={`answer-${i}`}>
+            <AudioPlayer
+              src={it.src}
+              isPlaying = {i === this.state.activePlayer}
+              onPlayButtonClick = {() =>
+                this.setState({
+                  activePlayer: this.state.activePlayer === i ? -1 : i
+                })}
+            />
+            <div className="game__answer">
+              <input className="game__input visually-hidden"
+                type="checkbox"
+                name="answer"
+                value={`answer-${i}`}
+                id={`answer-${i}`}
+                checked={this.state.userAnswer[i]}
+                onChange={() => {
+                  const userAnswer = [...this.state.userAnswer];
+                  userAnswer[i] = !userAnswer[i];
+                  this.setState({userAnswer});
+                }}
               />
-              <div className="game__answer">
-                <input className="game__input visually-hidden"
-                  type="checkbox"
-                  name="answer"
-                  value={`answer-${i}`}
-                  id={`answer-${i}`}
-                  checked={this.state.userAnswer[i]}
-                  onChange={() => {
-                    const userAnswer = [...this.state.userAnswer];
-                    userAnswer[i] = !userAnswer[i];
-                    this.setState({userAnswer});
-                  }}
-                />
-                <label className="game__check" htmlFor={`answer-${i}`}>
+              <label className="game__check" htmlFor={`answer-${i}`}>
                   Отметить
-                </label>
-              </div>
+              </label>
             </div>
-          )}
+          </div>
+        )}
 
-          <button className="game__submit button" type="submit">Ответить</button>
-        </form>
-      </section>
+        <button className="game__submit button" type="submit">Ответить</button>
+      </form>
     </section>;
   }
 }
