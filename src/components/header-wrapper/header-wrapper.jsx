@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Mistakes from "../mistakes/mistakes.jsx";
 
 const HeaderWrapper = (props) => {
 
@@ -29,9 +30,7 @@ const HeaderWrapper = (props) => {
       </div>
 
       <div className="game__mistakes">
-        <div className="wrong"></div>
-        <div className="wrong"></div>
-        <div className="wrong"></div>
+        <Mistakes mistakes={mistakes} />
       </div>
     </header>
     {game}
