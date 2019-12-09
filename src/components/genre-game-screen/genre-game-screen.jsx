@@ -19,7 +19,8 @@ class GenreGameScreen extends React.PureComponent {
 
     return <section className="game__screen">
       <h2 className="game__title">Выберите {question.genre} треки</h2>
-      <form className="game__tracks" onSubmit={() => {
+      <form className="game__tracks" onSubmit={(evt) => {
+        evt.preventDefault();
         this.setState({activePlayer: -1});
         onAnswer(this.state.userAnswer);
       }}>

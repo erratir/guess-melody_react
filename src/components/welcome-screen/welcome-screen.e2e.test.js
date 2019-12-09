@@ -10,7 +10,7 @@ it(`Clicks on startButton (.welcome__button) works correctly`, () => {
   const wrapper = shallow(<WelcomeScreen
     maxMistakes={0}
     maxTime={0}
-    onAnswer={btnClickHandler}
+    onClick={btnClickHandler}
   />);
 
   const startButton = wrapper.find(`.welcome__button`);
