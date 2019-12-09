@@ -2,173 +2,100 @@
 
 exports[`ArtistGameScreen is rendered correctly 1`] = `
 <section
-  className="game game--artist"
+  className="game__screen"
 >
-  <header
-    className="game__header"
+  <h2
+    className="game__title"
   >
-    <a
-      className="game__back"
-      href="#"
-    >
-      <span
-        className="visually-hidden"
-      >
-        Сыграть ещё раз
-      </span>
-      <img
-        alt="Угадай мелодию"
-        className="game__logo"
-        src="img/melody-logo-ginger.png"
-      />
-    </a>
-    <svg
-      className="timer"
-      viewBox="0 0 780 780"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <circle
-        className="timer__line"
-        cx="390"
-        cy="390"
-        r="370"
-        style={
-          Object {
-            "filter": "url(#blur)",
-            "transform": "rotate(-90deg) scaleY(-1)",
-            "transformOrigin": "center",
-          }
-        }
-      />
-    </svg>
-    <div
-      className="timer__value"
-      xmlns="http://www.w3.org/1999/xhtml"
-    >
-      <span
-        className="timer__mins"
-      >
-        05
-      </span>
-      <span
-        className="timer__dots"
-      >
-        :
-      </span>
-      <span
-        className="timer__secs"
-      >
-        00
-      </span>
-    </div>
-    <div
-      className="game__mistakes"
-    >
-      <div
-        className="wrong"
-      />
-      <div
-        className="wrong"
-      />
-      <div
-        className="wrong"
-      />
-    </div>
-  </header>
-  <section
-    className="game__screen"
+    Кто исполняет эту песню?
+  </h2>
+  <div
+    className="game__track"
   >
-    <h2
-      className="game__title"
-    >
-      Кто исполняет эту песню?
-    </h2>
+    <button
+      className="track__button track__button--play"
+      disabled={true}
+      onClick={[Function]}
+      type="button"
+    />
     <div
-      className="game__track"
+      className="track__status"
     >
-      <button
-        className="track__button track__button--play"
-        disabled={true}
+      <audio />
+    </div>
+  </div>
+  <form
+    className="game__artist"
+  >
+    <div
+      className="artist"
+    >
+      <input
+        className="artist__input visually-hidden"
+        id="answer-0"
+        name="answer"
         onClick={[Function]}
-        type="button"
+        type="radio"
+        value="artist-0"
       />
-      <div
-        className="track__status"
+      <label
+        className="artist__name"
+        htmlFor="answer-0"
       >
-        <audio />
-      </div>
+        <img
+          alt="Mr Putin"
+          className="artist__picture"
+          src=""
+        />
+        Mr Putin
+      </label>
     </div>
-    <form
-      className="game__artist"
-      onChange={[MockFunction]}
+    <div
+      className="artist"
     >
-      <div
-        className="artist"
+      <input
+        className="artist__input visually-hidden"
+        id="answer-1"
+        name="answer"
+        onClick={[Function]}
+        type="radio"
+        value="artist-1"
+      />
+      <label
+        className="artist__name"
+        htmlFor="answer-1"
       >
-        <input
-          className="artist__input visually-hidden"
-          id="answer-0"
-          name="answer"
-          type="radio"
-          value="artist-022"
+        <img
+          alt="Jon Snow"
+          className="artist__picture"
+          src=""
         />
-        <label
-          className="artist__name"
-          htmlFor="answer-1"
-        >
-          <img
-            alt="Mr Putin"
-            className="artist__picture"
-            src=""
-          />
-          Mr Putin
-        </label>
-      </div>
-      <div
-        className="artist"
+        Jon Snow
+      </label>
+    </div>
+    <div
+      className="artist"
+    >
+      <input
+        className="artist__input visually-hidden"
+        id="answer-2"
+        name="answer"
+        onClick={[Function]}
+        type="radio"
+        value="artist-2"
+      />
+      <label
+        className="artist__name"
+        htmlFor="answer-2"
       >
-        <input
-          className="artist__input visually-hidden"
-          id="answer-1"
-          name="answer"
-          type="radio"
-          value="artist-122"
+        <img
+          alt="Mr. Bim"
+          className="artist__picture"
+          src=""
         />
-        <label
-          className="artist__name"
-          htmlFor="answer-1"
-        >
-          <img
-            alt="Jon Snow"
-            className="artist__picture"
-            src=""
-          />
-          Jon Snow
-        </label>
-      </div>
-      <div
-        className="artist"
-      >
-        <input
-          className="artist__input visually-hidden"
-          id="answer-2"
-          name="answer"
-          type="radio"
-          value="artist-222"
-        />
-        <label
-          className="artist__name"
-          htmlFor="answer-1"
-        >
-          <img
-            alt="Mr. Bim"
-            className="artist__picture"
-            src=""
-          />
-          Mr. Bim
-        </label>
-      </div>
-    </form>
-  </section>
+        Mr. Bim
+      </label>
+    </div>
+  </form>
 </section>
 `;
