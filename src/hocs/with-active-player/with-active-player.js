@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react';
+import AudioPlayer from '../../components/audio-player/audio-player.jsx';
 
 
 /**
@@ -22,10 +23,15 @@ const withActivePlayer = (Component) => {
 
       return <Component
         {...this.props}
-        activePlayer={activePlayer}
-        onPlayButtonClick={(i) => this.setState({
-          activePlayer: activePlayer === i ? -1 : i
-        })}
+        renderPlayer={(it, index) => {
+          return <AudioPlayer
+            src={it.src}
+            isPlaying={index === activePlayer}
+            onPlayButtonClick={() => this.setState({
+              activePlayer: activePlayer === index ? -1 : index
+            })}
+          />;
+        }}
       />;
     }
   }

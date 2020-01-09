@@ -19,7 +19,7 @@ class ArtistGameScreen extends React.PureComponent {
     return <section className="game__screen">
       <h2 className="game__title">Кто исполняет эту песню?</h2>
       <div className="game__track">
-        <AudioPlayer
+        <AudioPlayer // todo применить HOC with-active-player и убрать из этого компонента рендер плеера
           src={song.src}
           isPlaying={isPlaying}
           onPlayButtonClick = {() =>
