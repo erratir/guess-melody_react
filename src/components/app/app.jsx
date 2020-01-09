@@ -6,6 +6,10 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer";
 import HeaderWrapper from "../header-wrapper/header-wrapper.jsx";
+import withActivePlayer from '../../hocs/with-active-player/with-active-player.js';
+
+// декорируем GenreGameScreen (оборачиваем HOC'ом) и дальше используем компонент GenreGameScreenWrapped, который уже понимает активплеер
+const GenreGameScreenWrapped = withActivePlayer(GenreGameScreen);
 
 
 class App extends Component {
@@ -57,7 +61,7 @@ class App extends Component {
    */
   _getGameScreen(question, onAnswer) {
     switch (question.type) {
-      case `genre`: return <GenreGameScreen
+      case `genre`: return <GenreGameScreenWrapped
         question = {question}
         onAnswer = {onAnswer}/>;
       case `artist`: return <ArtistGameScreen

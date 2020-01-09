@@ -36,6 +36,8 @@ it(`GenreGameScreen is rendered correctly`, () => {
   };
 
   const tree = renderer.create(<GenreGameScreen
+    activePlayer = {-1}
+    onPlayButtonClick = {jest.fn()}
     onAnswer = {jest.fn()}
     question = {mock}/>, {createNodeMock}
   ).toJSON();

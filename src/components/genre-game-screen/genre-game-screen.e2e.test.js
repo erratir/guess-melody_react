@@ -40,6 +40,8 @@ describe(`GenreGameScreen`, () => {
     const onAnswer = jest.fn();
 
     const genreGameScreen = shallow(<GenreGameScreen
+      activePlayer = {-1}
+      onPlayButtonClick = {jest.fn()}
       onAnswer={onAnswer}
       question={question}
     />);
@@ -60,6 +62,8 @@ describe(`GenreGameScreen`, () => {
     const onAnswer = jest.fn();
 
     const genreGameScreen = shallow(<GenreGameScreen
+      activePlayer = {-1}
+      onPlayButtonClick = {jest.fn()}
       onAnswer={onAnswer}
       question={question}
     />);
