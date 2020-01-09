@@ -7,10 +7,13 @@ import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer";
 import HeaderWrapper from "../header-wrapper/header-wrapper.jsx";
 import withActivePlayer from '../../hocs/with-active-player/with-active-player.js';
+import withUserAnswer from '../../hocs/with-user-answer/with-user-answer';
 
-// декорируем GenreGameScreen (оборачиваем HOC'ом) и дальше используем компонент GenreGameScreenWrapped, который уже понимает активплеер
-const GenreGameScreenWrapped = withActivePlayer(GenreGameScreen);
-
+/* декорируем GenreGameScreen дважды (оборачиваем 2мя HOC'ами):
+1 - оборачиваем HOC'ом withActivePlayer и теперь новый компонент может вкл\выкл плеер
+2 - оборачиваем HOC'ом withUserAnswer и теперь он может собирать ответы пользователя
+  и дальше уже используем компонент GenreGameScreenWrapped */
+const GenreGameScreenWrapped = withUserAnswer(withActivePlayer(GenreGameScreen));
 
 class App extends Component {
 
@@ -62,6 +65,7 @@ class App extends Component {
   _getGameScreen(question, onAnswer) {
     switch (question.type) {
       case `genre`: return <GenreGameScreenWrapped
+        answers={question.answers}
         question = {question}
         onAnswer = {onAnswer}/>;
       case `artist`: return <ArtistGameScreen

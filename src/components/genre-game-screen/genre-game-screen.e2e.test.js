@@ -3,6 +3,7 @@ import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import GenreGameScreen from "./genre-game-screen.jsx";
+import withUserAnswer from '../../hocs/with-user-answer/with-user-answer';
 
 
 Enzyme.configure({adapter: new Adapter()});
@@ -40,6 +41,8 @@ describe(`GenreGameScreen`, () => {
     const onAnswer = jest.fn();
 
     const genreGameScreen = shallow(<GenreGameScreen
+      onChange = {jest.fn()}
+      userAnswer={[]}
       activePlayer = {-1}
       onPlayButtonClick = {jest.fn()}
       onAnswer={onAnswer}
@@ -57,29 +60,55 @@ describe(`GenreGameScreen`, () => {
     expect(formPreventDefault).toHaveBeenCalledTimes(1);
   });
 
-  it(`Rendered checkboxes are synchronized with state`, () => {
+  it(`Rendered checkboxes are synchronized with prop "userAnswer"`, () => {
+    const GenreGameScreenWrapped = withUserAnswer(GenreGameScreen);
     const {question} = mock;
     const onAnswer = jest.fn();
 
-    const genreGameScreen = shallow(<GenreGameScreen
+    const genreGameScreen = shallow(<GenreGameScreenWrapped
       activePlayer = {-1}
+      answers={question.answers}
       onPlayButtonClick = {jest.fn()}
       onAnswer={onAnswer}
       question={question}
     />);
 
-    expect(genreGameScreen.state(`userAnswer`)).toEqual([false, false, false, false]);
-
-    const inputs = genreGameScreen.find(`input`);
-
-    inputs.at(0).simulate(`change`);
-    expect(genreGameScreen.state(`userAnswer`)).toEqual([true, false, false, false]);
+    const render = genreGameScreen.dive();
+    const inputs = render.find(`input`);
 
     inputs.at(0).simulate(`change`);
-    expect(genreGameScreen.state(`userAnswer`)).toEqual([false, false, false, false]);
+    expect(genreGameScreen.prop(`userAnswer`)).toEqual([true, false, false, false]);
+
+    inputs.at(0).simulate(`change`);
+    expect(genreGameScreen.prop(`userAnswer`)).toEqual([false, false, false, false]);
 
     inputs.at(2).simulate(`change`);
-    expect(genreGameScreen.state(`userAnswer`)).toEqual([false, false, true, false]);
+    expect(genreGameScreen.prop(`userAnswer`)).toEqual([false, false, true, false]);
+  });
+
+  it(`User answer passed to callback is consistent with "userAnswer" prop`, () => {
+    const {question} = mock;
+    const onAnswer = jest.fn();
+    const onChange = jest.fn();
+    const onPlayButtonClick = jest.fn();
+    const userAnswer = [false, true, false, false];
+
+    const genreQuestion = shallow(<GenreGameScreen
+      activePlayer = {-1}
+      onAnswer={onAnswer}
+      onChange={onChange}
+      onPlayButtonClick={onPlayButtonClick}
+      question={question}
+      userAnswer={userAnswer}
+    />);
+
+    const form = genreQuestion.find(`form`);
+    const inputTwo = genreQuestion.find(`input`).at(1);
+    inputTwo.simulate(`change`);
+    form.simulate(`submit`, {preventDefault() {}});
+
+    expect(genreQuestion.find(`input`).map((it) => it.prop(`checked`))).toEqual(userAnswer);
+    expect(onAnswer).toHaveBeenCalledTimes(1);
   });
 
 });

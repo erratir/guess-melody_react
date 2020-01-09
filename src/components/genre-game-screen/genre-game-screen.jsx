@@ -3,17 +3,9 @@ import PropTypes from "prop-types";
 import AudioPlayer from "../audio-player/audio-player.jsx";
 
 class GenreGameScreen extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    const {answers} = this.props.question;
-
-    this.state = {
-      userAnswer: new Array(answers.length).fill(false),
-    };
-  }
 
   render() {
+    const {userAnswer, onChange} = this.props;
     const {activePlayer, onPlayButtonClick} = this.props;
     const {question, onAnswer} = this.props;
 
@@ -21,8 +13,7 @@ class GenreGameScreen extends React.PureComponent {
       <h2 className="game__title">Выберите {question.genre} треки</h2>
       <form className="game__tracks" onSubmit={(evt) => {
         evt.preventDefault();
-        this.setState({activePlayer: -1});
-        onAnswer(this.state.userAnswer);
+        onAnswer();
       }}>
 
         {question.answers.map((it, i) =>
@@ -38,12 +29,8 @@ class GenreGameScreen extends React.PureComponent {
                 name="answer"
                 value={`answer-${i}`}
                 id={`answer-${i}`}
-                checked={this.state.userAnswer[i]}
-                onChange={() => {
-                  const userAnswer = [...this.state.userAnswer];
-                  userAnswer[i] = !userAnswer[i];
-                  this.setState({userAnswer});
-                }}
+                checked={userAnswer[i]}
+                onChange={() => onChange(i)}
               />
               <label className="game__check" htmlFor={`answer-${i}`}>
                   Отметить
@@ -59,6 +46,8 @@ class GenreGameScreen extends React.PureComponent {
 }
 
 GenreGameScreen.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  userAnswer: PropTypes.arrayOf(PropTypes.bool).isRequired,
   activePlayer: PropTypes.number.isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,
   question: PropTypes.shape({
