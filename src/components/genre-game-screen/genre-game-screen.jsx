@@ -5,7 +5,7 @@ class GenreGameScreen extends React.PureComponent {
 
   render() {
     const {userAnswer, onChange} = this.props;
-    const {renderPlayer} = this.props;
+    const {renderAnswer} = this.props;
     const {question, onAnswer} = this.props;
 
     return <section className="game__screen">
@@ -17,7 +17,7 @@ class GenreGameScreen extends React.PureComponent {
 
         {question.answers.map((it, i) =>
           <div className="track" key={`answer-${i}`}>
-            {renderPlayer(it, i)}
+            {renderAnswer(it, i)}
             <div className="game__answer">
               <input className="game__input visually-hidden"
                 type="checkbox"
@@ -41,7 +41,7 @@ class GenreGameScreen extends React.PureComponent {
 }
 
 GenreGameScreen.propTypes = {
-  renderPlayer: PropTypes.func.isRequired,
+  renderAnswer: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   userAnswer: PropTypes.arrayOf(PropTypes.bool).isRequired,
   question: PropTypes.shape({

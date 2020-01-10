@@ -8,12 +8,31 @@ import {ActionCreator} from "../../reducer";
 import HeaderWrapper from "../header-wrapper/header-wrapper.jsx";
 import withActivePlayer from '../../hocs/with-active-player/with-active-player.js';
 import withUserAnswer from '../../hocs/with-user-answer/with-user-answer';
+import withTransformProps from '../../hocs/with-transform-props/with-transform-props';
+
+/**
+ * Transform old props to the new
+ * Эту ф-ю далее передаем в HOC withTransformProps
+ * withTransformProps(transformPlayerToAnswer) - вернет HOC, который вернет переданный в него компонент с новыми пропсами
+ * @param {any} props
+ * @return {any}
+ */
+const transformPlayerToAnswer = (props) => {
+  const newProps = Object.assign({}, props, {
+    renderAnswer: props.renderPlayer,
+  });
+  delete newProps.renderPlayer;
+  return newProps;
+};
+
 
 /* декорируем GenreGameScreen дважды (оборачиваем 2мя HOC'ами):
+0 - трансформируем пропсы (см HOC withTransformProps)
 1 - оборачиваем HOC'ом withActivePlayer и теперь новый компонент может вкл\выкл плеер
 2 - оборачиваем HOC'ом withUserAnswer и теперь он может собирать ответы пользователя
   и дальше уже используем компонент GenreGameScreenWrapped */
-const GenreGameScreenWrapped = withUserAnswer(withActivePlayer(GenreGameScreen));
+// const GenreGameScreenWrapped = withUserAnswer(withActivePlayer(GenreGameScreen));
+const GenreGameScreenWrapped = withUserAnswer(withActivePlayer(withTransformProps(transformPlayerToAnswer)(GenreGameScreen)));
 
 class App extends Component {
 

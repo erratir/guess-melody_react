@@ -43,8 +43,7 @@ describe(`GenreGameScreen`, () => {
     const genreGameScreen = shallow(<GenreGameScreen
       onChange = {jest.fn()}
       userAnswer={[]}
-      activePlayer = {-1}
-      onPlayButtonClick = {jest.fn()}
+      renderAnswer = {jest.fn()}
       onAnswer={onAnswer}
       question={question}
     />);
@@ -66,9 +65,8 @@ describe(`GenreGameScreen`, () => {
     const onAnswer = jest.fn();
 
     const genreGameScreen = shallow(<GenreGameScreenWrapped
-      activePlayer = {-1}
       answers={question.answers}
-      onPlayButtonClick = {jest.fn()}
+      renderAnswer = {jest.fn()}
       onAnswer={onAnswer}
       question={question}
     />);
@@ -90,14 +88,12 @@ describe(`GenreGameScreen`, () => {
     const {question} = mock;
     const onAnswer = jest.fn();
     const onChange = jest.fn();
-    const onPlayButtonClick = jest.fn();
     const userAnswer = [false, true, false, false];
 
     const genreQuestion = shallow(<GenreGameScreen
-      activePlayer = {-1}
       onAnswer={onAnswer}
       onChange={onChange}
-      onPlayButtonClick={onPlayButtonClick}
+      renderAnswer = {jest.fn()}
       question={question}
       userAnswer={userAnswer}
     />);
