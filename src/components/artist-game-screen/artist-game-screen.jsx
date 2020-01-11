@@ -1,54 +1,37 @@
 import React from "react";
 import PropTypes from "prop-types";
-import AudioPlayer from "../audio-player/audio-player.jsx";
 
+const ArtistGameScreen = (props) => {
 
-class ArtistGameScreen extends React.PureComponent {
-  constructor(props) {
-    super(props);
+  const {song, answers, onAnswer, renderPlayer} = props;
 
-    this.state = {
-      isPlaying: false,
-    };
-  }
+  return <section className="game__screen">
+    <h2 className="game__title">Кто исполняет эту песню?</h2>
+    <div className="game__track">
 
-  render() {
-    const {song, answers, onAnswer} = this.props;
-    const {isPlaying} = this.state;
+      {renderPlayer(song, 0)}
 
-    return <section className="game__screen">
-      <h2 className="game__title">Кто исполняет эту песню?</h2>
-      <div className="game__track">
-        <AudioPlayer // todo применить HOC with-active-player и убрать из этого компонента рендер плеера
-          src={song.src}
-          isPlaying={isPlaying}
-          onPlayButtonClick = {() =>
-            this.setState({
-              isPlaying: !isPlaying
-            })}
+    </div>
+    <form className="game__artist">
 
+      {answers.map((answer, i) => <div className="artist" key={`artist-${i}`}>
+        <input className="artist__input visually-hidden"
+          type="radio"
+          name="answer"
+          value={`artist-${i}`}
+          id={`answer-${i}`}
+          onClick={() => onAnswer(answer)}
         />
-      </div>
-      <form className="game__artist">
+        <label className="artist__name" htmlFor={`answer-${i}`}>
+          <img className="artist__picture" src={answer.pic} alt={answer.artist}/>
+          {answer.artist}
+        </label>
+      </div>)}
 
-        {answers.map((answer, i) => <div className="artist" key={`artist-${i}`}>
-          <input className="artist__input visually-hidden"
-            type="radio"
-            name="answer"
-            value={`artist-${i}`}
-            id={`answer-${i}`}
-            onClick={() => onAnswer(answer)}
-          />
-          <label className="artist__name" htmlFor={`answer-${i}`}>
-            <img className="artist__picture" src={answer.pic} alt={answer.artist}/>
-            {answer.artist}
-          </label>
-        </div>)}
+    </form>
+  </section>;
 
-      </form>
-    </section>;
-  }
-}
+};
 
 ArtistGameScreen.propTypes = {
   song: PropTypes.shape({
@@ -60,6 +43,7 @@ ArtistGameScreen.propTypes = {
     pic: PropTypes.string.isRequired,
   })).isRequired,
   onAnswer: PropTypes.func.isRequired,
+  renderPlayer: PropTypes.func.isRequired,
 };
 
 export default ArtistGameScreen;

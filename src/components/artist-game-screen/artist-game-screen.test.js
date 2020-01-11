@@ -37,6 +37,7 @@ it(`ArtistGameScreen is rendered correctly`, () => {
   };
 
   const tree = renderer.create(<ArtistGameScreen
+    renderPlayer = {jest.fn()}
     onAnswer = {jest.fn()}
     song={song}
     answers={answers}/>, {createNodeMock}

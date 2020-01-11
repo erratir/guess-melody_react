@@ -34,6 +34,8 @@ const transformPlayerToAnswer = (props) => {
 // const GenreGameScreenWrapped = withUserAnswer(withActivePlayer(GenreGameScreen));
 const GenreGameScreenWrapped = withUserAnswer(withActivePlayer(withTransformProps(transformPlayerToAnswer)(GenreGameScreen)));
 
+const ArtistGameScreenWrapped = withActivePlayer(ArtistGameScreen);
+
 class App extends Component {
 
   /**
@@ -87,7 +89,7 @@ class App extends Component {
         answers={question.answers}
         question = {question}
         onAnswer = {onAnswer}/>;
-      case `artist`: return <ArtistGameScreen
+      case `artist`: return <ArtistGameScreenWrapped
         song = {question.song}
         answers = {question.answers}
         onAnswer = {onAnswer}/>;
