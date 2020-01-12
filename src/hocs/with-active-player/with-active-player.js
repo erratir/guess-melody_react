@@ -19,6 +19,8 @@ const withActivePlayer = (Component) => {
       this.state = {
         activePlayer: -1,
       };
+
+      this._onPlayButtonClick = this._onPlayButtonClick.bind(this);
     }
 
     render() {
@@ -30,13 +32,18 @@ const withActivePlayer = (Component) => {
           return <AudioPlayerWrapped
             src={it.src}
             isPlaying={index === activePlayer}
-            onPlayButtonClick={() => this.setState({
-              activePlayer: activePlayer === index ? -1 : index
-            })}
+            onPlayButtonClick={() => this._onPlayButtonClick(index)}
           />;
         }}
       />;
     }
+
+    _onPlayButtonClick(index) {
+      this.setState((prevState) => ({
+        activePlayer: prevState.activePlayer === index ? -1 : index
+      }));
+    }
+
   }
 
   WithActivePlayer.propTypes = {};
