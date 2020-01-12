@@ -16,8 +16,6 @@ describe(`AudioPlayer: Change state correctly when click on the button (play/pau
   let buttonClickHandler;
   let isPlaying = false;
   const event = {preventDefault: () => {}};
-  global.window.HTMLMediaElement.prototype.pause = () => {};
-  global.window.HTMLMediaElement.prototype.play = () => {};
 
   beforeEach(() => {
 
@@ -25,6 +23,8 @@ describe(`AudioPlayer: Change state correctly when click on the button (play/pau
 
     player = mount(
         <AudioPlayer
+          isLoading = {false}
+          renderAudio = {jest.fn()}
           isPlaying={isPlaying}
           onPlayButtonClick={buttonClickHandler}
           src={mock.src}
@@ -32,8 +32,6 @@ describe(`AudioPlayer: Change state correctly when click on the button (play/pau
     );
 
     button = player.find(`.track__button`);
-
-    player.setState({isLoading: false});
 
   });
 
@@ -51,9 +49,6 @@ describe(`AudioPlayer: Change state correctly when click on the button (play/pau
     it(`handler should be called once`, () => {
       expect(buttonClickHandler).toBeCalledTimes(1);
     });
-    it(`state "isPlaying" should true`, () => {
-      expect(player.state().isPlaying).toBe(true);
-    });
 
     describe(`click on button again`, () => {
       beforeEach(() => {
@@ -61,9 +56,6 @@ describe(`AudioPlayer: Change state correctly when click on the button (play/pau
       });
       it(`handler should be called twice`, () => {
         expect(buttonClickHandler).toBeCalledTimes(2);
-      });
-      it(`state "isPlaying" should be false`, () => {
-        expect(player.state().isPlaying).toBe(false);
       });
     });
   });
