@@ -11,7 +11,7 @@ import withUserAnswer from '../../hocs/with-user-answer/with-user-answer';
 import withTransformProps from '../../hocs/with-transform-props/with-transform-props';
 
 /**
- * Transform old props to the new
+ * Transform old props to the new (for GenreGameScreen)
  * Эту ф-ю далее передаем в HOC withTransformProps
  * withTransformProps(transformPlayerToAnswer) - вернет HOC, который вернет переданный в него компонент с новыми пропсами
  * @param {any} props
@@ -20,6 +20,19 @@ import withTransformProps from '../../hocs/with-transform-props/with-transform-p
 const transformPlayerToAnswer = (props) => {
   const newProps = Object.assign({}, props, {
     renderAnswer: props.renderPlayer,
+  });
+  delete newProps.renderPlayer;
+  return newProps;
+};
+
+/**
+ * Transform old props to the new (for GenreGameScreen ArtistGameScreen)
+ * @param {any} props
+ * @return {any}
+ */
+const transformPlayerToQuestion = (props) => {
+  const newProps = Object.assign({}, props, {
+    renderQuestion: props.renderPlayer,
   });
   delete newProps.renderPlayer;
   return newProps;
@@ -34,7 +47,7 @@ const transformPlayerToAnswer = (props) => {
 // const GenreGameScreenWrapped = withUserAnswer(withActivePlayer(GenreGameScreen));
 const GenreGameScreenWrapped = withUserAnswer(withActivePlayer(withTransformProps(transformPlayerToAnswer)(GenreGameScreen)));
 
-const ArtistGameScreenWrapped = withActivePlayer(ArtistGameScreen);
+const ArtistGameScreenWrapped = withActivePlayer(withTransformProps(transformPlayerToQuestion)(ArtistGameScreen));
 
 class App extends Component {
 

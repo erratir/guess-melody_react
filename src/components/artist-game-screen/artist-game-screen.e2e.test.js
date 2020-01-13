@@ -35,7 +35,7 @@ it(`The callback function onAnswer() was called with the correct parameters, whe
   const onAnswer = jest.fn();
 
   const screen = shallow(<ArtistGameScreen
-    renderPlayer = {jest.fn()}
+    renderQuestion = {jest.fn()}
     onAnswer={onAnswer}
     song={song}
     answers={answers}
