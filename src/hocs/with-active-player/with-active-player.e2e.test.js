@@ -15,12 +15,12 @@ it(`Should change state (activePlayer) when call onPlayButtonClick`, () => {
 
   expect(wrapper.state().activePlayer).toEqual(-1);
 
-  wrapper.instance()._onPlayButtonClick(1);
+  wrapper.instance().getOnPlayButtonClick(1)();
   expect(wrapper.state().activePlayer).toEqual(1);
 
-  wrapper.instance()._onPlayButtonClick(2);
+  wrapper.instance().getOnPlayButtonClick(2)();
   expect(wrapper.state().activePlayer).toEqual(2);
 
-  wrapper.instance()._onPlayButtonClick(2); // вызываеем onPlayButtonClick повторно с тем же ID -> плеер должен становится
+  wrapper.instance().getOnPlayButtonClick(2)(); // вызываеем onPlayButtonClick повторно с тем же ID -> плеер должен становится
   expect(wrapper.state().activePlayer).toEqual(-1);
 });
