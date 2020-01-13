@@ -60,7 +60,7 @@ const withAudio = (Component) => {
       });
 
       audio.ontimeupdate = () => this.setState({
-        progress: audio.currentTime
+        progress: Math.floor(audio.currentTime)
       });
     }
 
