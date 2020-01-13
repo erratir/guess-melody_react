@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 
 const ArtistGameScreen = (props) => {
 
-  const {song, answers, onAnswer, renderPlayer} = props;
+  const {song, answers, onAnswer, renderQuestion} = props;
 
   return <section className="game__screen">
     <h2 className="game__title">Кто исполняет эту песню?</h2>
     <div className="game__track">
 
-      {renderPlayer(song, 0)}
+      {renderQuestion(song, 0)}
 
     </div>
     <form className="game__artist">
@@ -43,7 +43,7 @@ ArtistGameScreen.propTypes = {
     pic: PropTypes.string.isRequired,
   })).isRequired,
   onAnswer: PropTypes.func.isRequired,
-  renderPlayer: PropTypes.func.isRequired,
+  renderQuestion: PropTypes.func.isRequired,
 };
 
 export default ArtistGameScreen;
